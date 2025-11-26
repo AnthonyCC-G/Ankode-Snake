@@ -5,3 +5,22 @@
     box-sizing: border-box;
 }
 
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    border-style: dashed;
+    border-color: red;
+    min-height: 100vh;
+    background-color: black;
+}
+
+h1, footer {
+    color: white;  
+}
+
+canvas {
+    border: 2px solid white;  
+}
