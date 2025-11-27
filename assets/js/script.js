@@ -17,9 +17,9 @@ const canvas = document.getElementById('game');
 const ctx = canvas.getContext('2d');
 const tailleCase = 20;
 let score = 0;
-let enPause = false;
+let premierePartie = true;
 
-console.log('Canvas !', canvas.width, canvas.height);
+console.log('Canvas bien présent !', canvas.width, canvas.height);
 
 // ================================
 // ÉTAT DU JEU (variables)
@@ -99,7 +99,27 @@ function verifierCollision() {
     return false;
 }
 
+function togglePause() {
+    if (premierePartie) {
+        return;
+    }
+    
+    if (enPause) {
+        intervalId = setInterval(boucleDeJeu, 200);
+        enPause = false;
+    } else {
+        clearInterval(intervalId);
+        enPause = true;
+    }
+}
+
+
+
 function relancer() {
+    if (intervalId) {
+        clearInterval(intervalId);
+    }
+    
     serpent = [
         {x: 80, y: 100},
         {x: 60, y: 100},
@@ -109,19 +129,16 @@ function relancer() {
     score = 0;
     document.getElementById('score').textContent = 'Score : 0';
     nourriture = genererNourriture();
+    enPause = false;
     intervalId = setInterval(boucleDeJeu, 200);
+    
+    // Change le texte du bouton après le premier lancement
+    if (premierePartie) {
+        document.getElementById('btn-relancer').textContent = 'Rejouer';
+        premierePartie = false;
+    }
 }
 
-//METTRE EN PAUSE L'AVANCEE DU SERPENT
-function togglePause() {
-    if (enPause) {
-        intervalId = setInterval(boucleDeJeu, 200);
-        enPause = false;
-    } else {
-        clearInterval(intervalId);
-        enPause = true;
-    }
-}  
 
 
 // ================================
@@ -134,11 +151,10 @@ function boucleDeJeu() {
     
     if (verifierCollision()) {
     clearInterval(intervalId);
-    if (confirm('Game Over ! Score : ' + score + '\nRejouer ?')) { // caractère d'échappement = \n , il permet de passer à la ligne
-        relancer();
-    }
+    enPause = true;  // Le jeu s'arrête
     return;
-}
+    }
+    
     
     dessinerSerpent();
     dessinerNourriture();
@@ -163,26 +179,8 @@ document.addEventListener('keydown', (e) => {
         case 'ArrowRight':
             if (direction.x === 0) direction = {x: 20, y: 0};
             break;
-    }
-});
-
-
-//TOUCHE ESPACE
-document.addEventListener('keydown', (e) => {
-    switch(e.key) {
-        case 'ArrowUp':
-            if (direction.y === 0) direction = {x: 0, y: -20};
-            break;
-        case 'ArrowDown':
-            if (direction.y === 0) direction = {x: 0, y: 20};
-            break;
-        case 'ArrowLeft':
-            if (direction.x === 0) direction = {x: -20, y: 0};
-            break;
-        case 'ArrowRight':
-            if (direction.x === 0) direction = {x: 20, y: 0};
-            break;
-        case ' ':  // Touche Espace
+        case ' ':
+            e.preventDefault();
             togglePause();
             break;
     }
@@ -194,5 +192,14 @@ document.addEventListener('keydown', (e) => {
 // LANCEMENT DU JEU
 // ================================
 
-nourriture = genererNourriture();  // Génère la première nourriture
-let intervalId = setInterval(boucleDeJeu, 200);  // Lance la boucle
+// Prépare le jeu (mais ne le lance pas)
+nourriture = genererNourriture();
+let intervalId = null;
+let enPause = true;  // Le jeu commence en pause
+
+// Dessine l'état initial (sans mouvement)
+dessinerSerpent();
+dessinerNourriture();
+
+// Bouton relancer
+document.getElementById('btn-relancer').addEventListener('click', relancer);
