@@ -8,9 +8,29 @@
 </head>
 <body>
     <h1>SNAKE</h1>
-    <p id="score">Score : 0</p>
-    <canvas id="game" width="400" height="400"></canvas>
-    <footer>Fait par Anthony CC</footer>
+    <main>
+        <aside class="tuto">
+            <h2>TUTO simple</h2>
+            <p>Utilisez les flèches directionnelles pour diriger le serpent.</p>
+            <p>Mangez la nourriture pour grandir.</p>
+            <p>Évitez les murs et votre propre corps !</p>
+            <p><strong>Espace</strong> = Pause</p>
+        </aside>
+        <section class="game-zone">
+            <div class="game-header">
+                <p id="score">Score : 0</p>
+                <button id="btn-relancer">Jouer</button>
+            </div>
+            <canvas id="game" width="400" height="400"></canvas>
+        </section>
+        <aside class="mascotte">
+            <img src="assets/image/ankodeVSsnake.gif" alt="Mascotte Ankode versus Snake">
+        </aside>
+    </main>
+    <footer>
+        <p>Codé avec passion, et beaucoup (trop) d'analogies pour capter l'évolution du serpent.</p>
+        <p><strong>Anthony CC</strong></p>
+    </footer>
     <script src="assets/js/script.js"></script>
 </body>
 </html>

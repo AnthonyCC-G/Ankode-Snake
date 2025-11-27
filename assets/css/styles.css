@@ -1,4 +1,18 @@
-/* Reset de base */
+/* ================================
+VARIABLES (ta palette Coolors)
+   ================================ */
+
+:root {
+    --noir: #000000;
+    --paprika: #CF5C36;
+    --lavender: #EEE5E9;
+    --apricot: #EFC88B;
+    --jungle: #47A025;
+}
+
+/* ================================
+RESET DE BASE
+   ================================ */
 * {
     margin: 0;
     padding: 0;
@@ -6,21 +20,142 @@
 }
 
 body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    border-style: dashed;
-    border-color: red;
     min-height: 100vh;
-    background-color: black;
+    background-color: var(--noir);
+    color: var(--lavender);
+    font-family: Arial, sans-serif;
 }
 
-h1, footer {
-    color: white;  
+/* ================================
+TITRE
+   ================================ */
+h1 {
+    text-align: center;
+    font-size: 3rem;
+    padding: 20px;
+}
+
+/* ================================
+LAYOUT 3 COLONNES
+   ================================ */
+main {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Colonnes gauche et droite */
+.tuto, .mascotte {
+    width: 200px;
+    background-color: var(--lavender);
+    color: var(--noir);
+    border: 3px solid var(--apricot);
+    border-radius: 10px;
+    padding: 15px;
+}
+
+/* Colonne centrale */
+.game-zone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ================================
+   ZONE DE JEU (colonne centrale)
+   ================================ */
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 406px;  /* 400px du canvas + 6px de bordures (3px chaque côté) */
+    background-color: var(--apricot);
+    color: var(--noir);
+    padding: 10px 15px;
+    border-radius: 10px 10px 0 0;
+    border: 3px solid var(--apricot);
+    box-sizing: border-box;  
+}
+
+#score {
+    font-weight: bold;
+}
+
+#btn-relancer {
+    background-color: var(--noir);
+    color: var(--lavender);
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#btn-relancer:hover {
+    background-color: var(--jungle);
 }
 
 canvas {
-    border: 2px solid white;  
+    background-color: var(--lavender);
+    border: 3px solid var(--apricot);
+    border-top: none;
+    border-radius: 0 0 10px 10px;
+}
+
+/* ================================
+MASCOTTE
+   ================================ */
+
+.mascotte {
+    background-color: var(--noir);
+}
+
+
+.mascotte img {
+    width: 100%;
+    height: auto;
+}
+
+/* ================================
+FOOTER
+   ================================ */
+footer {
+    text-align: center;
+    padding: 30px;
+    margin-top: 20px;
+}
+
+footer p {
+    margin-bottom: 10px;
+}
+
+/* ================================
+TUTO
+   ================================ */
+.tuto {
+    width: 250px;  /* Plus large */
+    min-height: 400px;  /* Même hauteur que le canvas */
+}
+
+.tuto h2 {
+    margin-bottom: 15px;
+    color: var(--noir);
+    animation: wiggle 1s ease-in-out infinite;
+}
+
+.tuto p {
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+    animation: wiggle 1.2s ease-in-out infinite;
+}
+
+/* Animation */
+@keyframes wiggle {
+    0%, 100% {
+        transform: rotate(-1deg);
+    }
+    50% {
+        transform: rotate(1deg);
+    }
 }
