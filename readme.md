@@ -2,6 +2,8 @@
 
 Un jeu Snake classique réalisé en HTML, CSS et JavaScript vanilla.
 
+[Jouer maintenant !](https://anthonycc-g.github.io/Ankode-Snake/)
+
 ![Screenshot du jeu](assets/image/Screenshot%20GAME%20SNAKE.png)
 
 ## 🎯 Objectif du projet
